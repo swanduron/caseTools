@@ -1,0 +1,9 @@
+DGX:
+  First imformaion: Dear sender, \nplease leave your DGX SN number of the box, you can get this information on the back of chassis. <br><br>Regards<br>Haitao Sun
+  OOW: Dear sender, your requested device has been OOW, please contact your product provider to resolve this issue.
+InfiniBand:
+  Starting: Dear sender, please leave your SN number of the box
+  OOW: Dear sender, your requested device has been OOW, please contact your product provider to resolve this issue.
+Cumulus:
+  Starting: Dear sender, please leave your SN number of the box
+  OOW: Dear sender, your requested device has been OOW, please contact your product provider to resolve this issue.

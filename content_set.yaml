@@ -1,0 +1,14 @@
+DGX:
+  Starting: |
+    Dear sender,
+
+    please leave your SN number of the box. You can find this information in the rare of the chassis
+  OOW: |
+    Dear sender,
+
+    your requested device has been OOW, please contact your product provider to resolve this issue.
+InfiniBand:
+  Starting: Dear sender, please leave your SN number of the box
+  OOW:
+    OOW1:   Dear sender, your requested device has been OOW, please contact your product provider to resolve this issue.
+    OOW2:   Dear sender, your requested device has been OOW, please contact your product provider to resolve this issue.
