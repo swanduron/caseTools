@@ -60,6 +60,15 @@ class Window(QWidget):
                 rootList.append(child)
         self.treeView.insertTopLevelItems(0, rootList)
 
+    def treeGenerator(self, root, data):
+        for k, v in data.items():
+            if isinstance(v, dict):
+                self.treeGenerator(root, v)
+            else:
+                child = QTreeWidgetItem(root)
+                child.setText(0, k)
+
+
     def file_warning(self):
         QMessageBox.information(self, "File unexpected!", "This file is not regular YAML file.")
 
