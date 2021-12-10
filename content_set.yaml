@@ -11,4 +11,14 @@ InfiniBand:
   Starting: Dear sender, please leave your SN number of the box
   OOW:
     OOW1:   Dear sender, your requested device has been OOW, please contact your product provider to resolve this issue.
-    OOW2:   Dear sender, your requested device has been OOW, please contact your product provider to resolve this issue.
+  RMA: |
+    Dear RMA team:
+    
+    Please give a finger on this case. The card is still under warranty but unavailable now. Customer will raise RMA request and I will transfer them to your side.
+    
+    RMA related information please check previous message.
+    
+    Some trouble shooting steps please refer to below list and that's why I asserted that this card is failure.
+    
+    Regards
+    Haitao Sun

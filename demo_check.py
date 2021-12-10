@@ -18,6 +18,7 @@ class Window(QWidget):
     def setup_ui(self):
         self.templatePath = QLabel(self)
         self.config_status = QLabel(self)
+        self.config_status.setAlignment(Qt.AlignCenter)
         self.btn = QPushButton()
         self.btn.setText('Load config')
         self.btn.clicked.connect(self.openNewTemplate)
@@ -49,24 +50,33 @@ class Window(QWidget):
             self.config_status.setStyleSheet('background-color: red;')
 
         rootList = []
-        for key in self.data.keys():
-            root = QTreeWidgetItem()
-            root.setText(0, key)
-            rootList.append(root)
-            for k, v in self.data[key].items():
-                child = QTreeWidgetItem()
-                child.setText(0, k)
-                root.addChild(child)
-                rootList.append(child)
+
+        self.treeGenerator(self.data, rootList)
+
         self.treeView.insertTopLevelItems(0, rootList)
 
-    def treeGenerator(self, root, data):
+    def treeGenerator(self, data, rootList, root=None):
         for k, v in data.items():
-            if isinstance(v, dict):
-                self.treeGenerator(root, v)
-            else:
-                child = QTreeWidgetItem(root)
-                child.setText(0, k)
+            if isinstance(v, str):
+                if root:
+                    elementPoint = QTreeWidgetItem(root)
+                    elementPoint.setText(0, k)
+                    elementPoint.setText(1, v)
+                else:
+                    elementPoint = QTreeWidgetItem()
+                    elementPoint.setText(0, k)
+                    elementPoint.setText(1, v)
+                    rootList.append(elementPoint)
+            elif isinstance(v, dict):
+                if root:
+                    elementPoint = QTreeWidgetItem(root)
+                    elementPoint.setText(0, k)
+                    self.treeGenerator(v, rootList, elementPoint)
+                else:
+                    elementPoint = QTreeWidgetItem()
+                    elementPoint.setText(0, k)
+                    rootList.append(elementPoint)
+                    self.treeGenerator(v, rootList, elementPoint)
 
 
     def file_warning(self):
@@ -99,16 +109,21 @@ class Window(QWidget):
             return {}
 
 
-    def freshTextBox(self, path):
+    def freshTextBox(self, qmodelindex):
+        # How to use QModelIndex?
         self.textBlock.clear()
-        childLevel = path.data()
-        parentLevel = path.parent().data()
-        if not parentLevel:
-            return
-        textContent = self.data[parentLevel][childLevel]
-        self.textBlock.setPlainText(textContent)
-        clipboard = QApplication.clipboard()
-        clipboard.setText(textContent)
+        # Below command can get certain item that is clicked, model is QTreeWidgetItem
+        item = self.treeView.currentItem()
+        print(item.text(0),'<---->',item.text(1))
+        # childLevel = path.data()
+        # parentLevel = path.parent().data()
+        # if not parentLevel:
+        #     return
+        # textContent = self.data[parentLevel][childLevel]
+        if item.text(1):
+            self.textBlock.setPlainText(item.text(1))
+            clipboard = QApplication.clipboard()
+            clipboard.setText(item.text(1))
 
 
 if __name__ == '__main__':
